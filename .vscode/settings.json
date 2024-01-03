@@ -24,10 +24,12 @@
     "isort",
     "mypy",
     "narabi",
+    "pypi",
     "pyproject",
     "pypy",
     "pytest",
     "Pythonic",
-    "refurb"
+    "refurb",
+    "sdist"
   ]
 }

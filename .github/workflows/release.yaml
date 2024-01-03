@@ -1,0 +1,39 @@
+name: release
+on:
+  push:
+    tags:
+    - "*.*.*"
+    branches:
+    - "*"
+  pull_request: {}
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/Narabi
+    permissions:
+      id-token: write
+      contents: write
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+      with:
+        python-version: "3.x"
+    - run: pip3 install build
+    - run: python3 -m build --sdist --wheel .
+    - uses: actions/upload-artifact@v4
+      with:
+        name: dist
+        path: dist
+    - if: github.ref_type == 'tag'
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          dist/narabi-*.tar.gz
+          dist/narabi-*.whl
+    - if: github.ref_type == 'tag'
+      uses: pypa/gh-action-pypi-publish@release/v1
+
+# cSpell: ignore pypa softprops
