@@ -1,0 +1,80 @@
+[project]
+name = "Narabi"
+description = "A simple Pythonic asynchronous interface to inter-process queues"
+version = "0.1.0"
+readme = "README.rst"
+keywords = ["mq", "message queue", "queue", "pubsub"]
+classifiers = [
+  "Development Status :: 2 - Pre-Alpha",
+  "Framework :: AsyncIO",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)",
+  "Operating System :: MacOS :: MacOS X",
+  "Operating System :: Microsoft :: Windows",
+  "Operating System :: POSIX :: Linux",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Typing :: Typed",
+]
+authors = [
+  { name = "Hong Minhee (洪 民憙)", email = "hong@minhee.org" },
+]
+license = { file = "LICENSE" }
+requires-python = ">= 3.10"
+
+dependencies = [
+]
+
+[project.optional-dependencies]
+redis = [
+  "redis[hiredis] >= 4.2.0",
+]
+dev = [
+  "flake8 ~= 6.1.0",
+  "flake8-bugbear ~= 23.12.2",
+  "mypy ~= 1.8.0",
+  "pyproject-flake8 ~= 6.1.0",
+  "pytest ~= 7.4.3",
+  "pytest-asyncio ~= 0.23.2",
+  "pytest-mypy ~= 0.10.3",
+  "types-redis >= 4.2.0",
+]
+
+[project.entry-points."narabi.backend"]
+redis = "narabi.backends.redis:RedisBackend"
+
+[tool.setuptools.packages.find]
+include = ["narabi"]
+
+[build-system]
+requires = ["setuptools >= 60"]
+build-backend = "setuptools.build_meta"
+
+[tool.black]
+line-length = 79
+target-version = ["py310"]
+preview = true
+
+[tool.flake8]
+max-line-length = 79
+
+[tool.isort]
+profile = "black"
+line_length = 79
+
+[tool.mypy]
+strict = true
+files = ["fedikit", "tests"]
+scripts_are_modules = true
+
+[[tool.mypy.overrides]]
+module = ["tests.*"]
+disallow_untyped_defs = false
+
+[tool.pytest.ini_options]
+addopts = "--mypy"
