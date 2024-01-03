@@ -45,6 +45,10 @@ dev = [
   "types-redis >= 4.2.0",
 ]
 
+[project.urls]
+"Source Code" = "https://github.com/dahlia/narabi"
+"Issue Tracker" = "https://github.com/dahlia/narabi/issues"
+
 [project.entry-points."narabi.backend"]
 redis = "narabi.backends.redis:RedisBackend"
 
