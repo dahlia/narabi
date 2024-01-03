@@ -1,4 +1,4 @@
-from asyncio import TaskGroup
+from asyncio import gather, sleep
 from typing import AsyncGenerator
 
 import pytest
@@ -35,6 +35,7 @@ async def test_session_open_publisher(session: Session) -> None:
 @pytest.mark.asyncio
 async def test_session_pub_sub(session: Session) -> None:
     async def pub() -> None:
+        await sleep(0.1)
         publisher = await session.open_publisher()
         try:
             await publisher.publish(b"message")
@@ -57,8 +58,5 @@ async def test_session_pub_sub(session: Session) -> None:
         finally:
             await subscription.close()
 
-    async with TaskGroup() as tg:
-        tg.create_task(sub())
-        tg.create_task(pub())
-
+    await gather(sub(), pub())
     assert messages == [b"message", b"message2", b"end"]

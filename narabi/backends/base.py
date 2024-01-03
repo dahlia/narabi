@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from importlib.metadata import entry_points
-from typing import Awaitable, Optional, Protocol, Self
+from typing import Awaitable, Optional, Protocol
 from urllib.parse import ParseResult, urlparse
 
 __all__ = ["Backend", "Publisher", "Session", "Subscription", "from_url"]
@@ -9,7 +9,7 @@ __all__ = ["Backend", "Publisher", "Session", "Subscription", "from_url"]
 class Backend(ABC):
     @classmethod
     @abstractmethod
-    def from_url(cls, url: ParseResult) -> Self: ...
+    def from_url(cls, url: ParseResult) -> "Backend": ...
 
     @abstractmethod
     def open_session(self, topic: str) -> Awaitable["Session"]: ...

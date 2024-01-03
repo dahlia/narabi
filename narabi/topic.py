@@ -1,5 +1,5 @@
 from types import TracebackType
-from typing import AsyncIterable, Generic, Optional, Self, TypeVar
+from typing import AsyncIterable, Generic, Optional, TypeVar
 
 from narabi.publisher import PublisherContext
 
@@ -26,7 +26,7 @@ class Topic(Generic[T]):
         self.session = None
         self.subscription = None
 
-    async def __aenter__(self) -> Self:
+    async def __aenter__(self) -> "Topic[T]":
         self.session = await self.backend.open_session(self.name)
         return self
 

@@ -1,4 +1,4 @@
-from asyncio import TaskGroup
+from asyncio import gather, sleep
 from base64 import b64encode
 from random import randbytes
 from typing import AsyncGenerator
@@ -24,6 +24,7 @@ async def topic(
 @pytest.mark.asyncio
 async def test_topic_pub_sub(topic: Topic[dict[str, str]]) -> None:
     async def pub() -> None:
+        await sleep(0.1)
         async with topic.publisher() as publisher:
             await publisher.publish({"foo": "hello"})
             await publisher.publish({"bar": "world"})
@@ -37,8 +38,5 @@ async def test_topic_pub_sub(topic: Topic[dict[str, str]]) -> None:
             if not message:
                 break
 
-    async with TaskGroup() as tg:
-        tg.create_task(sub())
-        tg.create_task(pub())
-
+    await gather(sub(), pub())
     assert messages == [{"foo": "hello"}, {"bar": "world"}, {}]

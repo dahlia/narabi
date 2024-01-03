@@ -5,7 +5,6 @@ from typing import (
     Callable,
     Generic,
     Optional,
-    Self,
     TypeVar,
 )
 
@@ -31,7 +30,7 @@ class PublisherContext(Generic[T], AsyncContextManager["PublisherContext[T]"]):
         self.codec = codec
         self.publisher = None
 
-    async def __aenter__(self) -> Self:
+    async def __aenter__(self) -> "PublisherContext[T]":
         if self.publisher is not None:
             raise PublisherContextError("publisher context is already opened")
         self.publisher = await self.open_publisher()

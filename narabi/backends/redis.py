@@ -1,5 +1,5 @@
 import typing
-from typing import Optional, Self, cast
+from typing import Optional, cast
 from urllib.parse import ParseResult
 
 if typing.TYPE_CHECKING:
@@ -25,7 +25,7 @@ class RedisBackend(Backend):
     redis: Redis
 
     @classmethod
-    def from_url(cls, url: ParseResult) -> Self:
+    def from_url(cls, url: ParseResult) -> "RedisBackend":
         redis = Redis(
             host=url.hostname or "localhost",
             port=url.port or 6379,
