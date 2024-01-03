@@ -25,6 +25,7 @@
     "mypy",
     "narabi",
     "pyproject",
+    "pypy",
     "pytest",
     "Pythonic",
     "refurb"

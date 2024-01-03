@@ -1,0 +1,36 @@
+name: test
+on:
+  pull_request: {}
+  push:
+    branches:
+    - "*"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      redis:
+        image: redis
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+        - 6379:6379
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+      with:
+        python-version: |
+          3.10
+          3.11
+          3.12
+    - uses: install-pinned/tox@f30881462c1548e0b438f2fad2098fbd45ea86d9
+    - run: |
+        set -e
+        if [[ "$RUNNER_DEBUG" = "1" ]]; then
+          debug_options="--verbose"
+        fi
+        tox $debug_options
+      shell: bash
