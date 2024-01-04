@@ -1,7 +1,7 @@
 [project]
 name = "Narabi"
 description = "A simple Pythonic asynchronous interface to inter-process pub/sub"
-version = "0.2.0"
+version = "0.2.1"
 readme = "README.rst"
 keywords = ["pubsub"]
 classifiers = [
@@ -53,7 +53,8 @@ dev = [
 redis = "narabi.backends.redis:RedisBackend"
 
 [tool.setuptools.packages.find]
-include = ["narabi"]
+include = ["narabi*"]
+namespaces = false
 
 [build-system]
 requires = ["setuptools >= 60"]
