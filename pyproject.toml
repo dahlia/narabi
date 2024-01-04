@@ -1,9 +1,9 @@
 [project]
 name = "Narabi"
-description = "A simple Pythonic asynchronous interface to inter-process queues"
-version = "0.1.0"
+description = "A simple Pythonic asynchronous interface to inter-process pub/sub"
+version = "0.2.0"
 readme = "README.rst"
-keywords = ["mq", "message queue", "queue", "pubsub"]
+keywords = ["pubsub"]
 classifiers = [
   "Development Status :: 2 - Pre-Alpha",
   "Framework :: AsyncIO",

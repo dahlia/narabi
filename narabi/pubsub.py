@@ -5,13 +5,13 @@ from .backends.base import Backend, from_url
 from .codec import Codec
 from .topic import Topic
 
-__all__ = ["Queue"]
+__all__ = ["PubSub"]
 
 
 T = TypeVar("T")
 
 
-class Queue:
+class PubSub:
     backend: Backend
     codec: Codec
 

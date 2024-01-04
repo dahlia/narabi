@@ -1,16 +1,16 @@
 from contextlib import suppress
 from sys import argv
 
-from narabi.queue import Queue
+from narabi.pubsub import PubSub
 
 
 async def main() -> None:
     if len(argv) < 2:
         print(f"Usage: {argv[0]} TOPIC")
         raise SystemExit(1)
-    queue = Queue("redis://")
+    pubsub = PubSub("redis://")
     async with (
-        queue.topic(argv[1], str) as topic,
+        pubsub.topic(argv[1], str) as topic,
         topic.publisher() as publisher,
     ):
         while True:
