@@ -3,7 +3,7 @@ default_language_version:
 
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v3.2.0
+  rev: v4.5.0
   hooks:
   - id: check-merge-conflict
   - id: check-byte-order-marker
@@ -33,7 +33,7 @@ repos:
     - pyproject-flake8 ~= 6.1.0
 
 - repo: https://github.com/dosisod/refurb
-  rev: v1.26.0
+  rev: v1.27.0
   hooks:
   - id: refurb
 
