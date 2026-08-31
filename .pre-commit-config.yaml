@@ -3,7 +3,7 @@ default_language_version:
 
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v4.5.0
+  rev: v6.0.0
   hooks:
   - id: check-merge-conflict
   - id: check-byte-order-marker
@@ -14,18 +14,18 @@ repos:
   - id: debug-statements
 
 - repo: https://github.com/Lucas-C/pre-commit-hooks
-  rev: v1.5.4
+  rev: v1.5.6
   hooks:
   - id: remove-crlf
 
 - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
-  rev: 2.7.3
+  rev: 3.11.1
   hooks:
   - id: editorconfig-checker
     alias: ec
 
 - repo: https://github.com/PyCQA/flake8
-  rev: 6.1.0
+  rev: 7.3.0
   hooks:
   - id: flake8
     additional_dependencies:
@@ -33,22 +33,22 @@ repos:
     - pyproject-flake8 ~= 6.1.0
 
 - repo: https://github.com/dosisod/refurb
-  rev: v1.27.0
+  rev: v2.3.1
   hooks:
   - id: refurb
 
-- repo: https://github.com/psf/black
-  rev: 23.12.1
+- repo: https://github.com/psf/black-pre-commit-mirror
+  rev: 26.5.1
   hooks:
   - id: black
 
 - repo: https://github.com/pycqa/isort
-  rev: 5.13.2
+  rev: 9.0.1
   hooks:
   - id: isort
 
 - repo: https://github.com/pre-commit/mirrors-mypy
-  rev: v1.8.0
+  rev: v2.3.1
   hooks:
   - id: mypy
     args: [--config-file, pyproject.toml]
